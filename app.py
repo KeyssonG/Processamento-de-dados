@@ -6,7 +6,7 @@ import random
 
 dados_conexao = (
     "Driver={SQL Server};"
-    "Server=DESKTOP-5SNUTLQ;"
+    "Server=;"
     "Database=vendas_teste;"
     "Trusted_Connection=yes;"
 )
