@@ -1,5 +1,6 @@
 import pyodbc
 from datetime import datetime
+import time
 
 
 conexao = pyodbc.connect(
@@ -31,5 +32,9 @@ with open(caminho, "w") as arquivo:
         arquivo.write(str(linha) + "\n")
 
 
+    
+
 cursor.close()
 conexao.close()
+
+time.sleep(1)

@@ -3,7 +3,7 @@ import paramiko
 import time
 
 def transferir_arquivos():
-    host = '192.168.15.6'
+    host = '192.168.15.7'
     port = 22
     username = 'keysson'
     password = '251299'
@@ -24,9 +24,20 @@ def transferir_arquivos():
         caminho_arquivo_origem = os.path.join(caminho_origem_windows, arquivo)
         caminho_arquivo_destino = os.path.join(caminho_destino_linux, arquivo)
 
-        sftp.put(caminho_arquivo_origem, caminho_arquivo_destino)
+        if 'dadosvendas' in sftp.listdir(caminho_destino_linux):
+            with sftp.open(caminho_arquivo_destino, 'a') as arquivo_destino, open(caminho_arquivo_origem, 'r') as arquivo_origem:
+                for linha in arquivo_origem:
+                    arquivo_destino.write(linha)
 
-        os.remove(caminho_arquivo_origem)
+            os.remove(caminho_arquivo_origem)        
+
+
+        else:
+            sftp.put(caminho_arquivo_origem, caminho_arquivo_destino)
+
+            sftp.rename(caminho_arquivo_destino, os.path.join(caminho_destino_linux, 'dadosvendas'))
+
+            os.remove(caminho_arquivo_origem)
 
     sftp.close()
     ssh_client.close()    
@@ -34,4 +45,4 @@ def transferir_arquivos():
 while True:
 
     transferir_arquivos()
-    time.sleep(5)
+    time.sleep(2)

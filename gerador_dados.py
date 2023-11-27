@@ -30,6 +30,6 @@ for _ in range(50):
     cursor.execute(query, (ID, nome, data_venda, produto, valor))
     conexao.commit()
 
-    time.sleep(5)
+    time.sleep(2)
 
 conexao.close()    
