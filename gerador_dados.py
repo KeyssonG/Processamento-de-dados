@@ -1,6 +1,7 @@
 import pyodbc
 from faker import Faker
 import random
+import time
 
 
 
@@ -18,7 +19,7 @@ fake = Faker()
 
 produtos = ['camisa', 'celular', 'sapato', 'tênis', 'relógio', 'mochila', 'bermuda']
 
-for _ in range(100):
+for _ in range(50):
     ID = str(random.randint(1, 99999)).zfill(5)
     nome = fake.name()
     data_venda = fake.date_between(start_date='-1y', end_date='today').strftime('%Y-%m-%d')
@@ -28,5 +29,7 @@ for _ in range(100):
     query = "INSERT INTO vendas (ID, nome, data_venda, produto, valor) VALUES (?, ?, ?, ?, ?)"
     cursor.execute(query, (ID, nome, data_venda, produto, valor))
     conexao.commit()
+
+    time.sleep(5)
 
 conexao.close()    
