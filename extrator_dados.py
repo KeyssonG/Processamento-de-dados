@@ -18,13 +18,11 @@ cursor = conexao.cursor()
 cursor.execute(query)
 
 
-data_atual = datetime.now().strftime('%Y-%m-%d')
+
+nome_arquivo = f"dadosvendas.txt"
 
 
-nome_arquivo = f"dadosvendas_{data_atual}.txt"
-
-
-caminho = r"C:\Users\keysson\Documents\dados_extraidos\\" + nome_arquivo  # Substitua 'keysson' pelo seu nome de usuário
+caminho = r"C:\Users\keysson\Documents\dados_extraidos\\" + nome_arquivo
 
 
 with open(caminho, "w") as arquivo:
